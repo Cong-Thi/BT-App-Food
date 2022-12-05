@@ -106,13 +106,13 @@ LIMIT 1
 ;
 
 -- cau4: tìm người dùng không hoạt dộng trong hệ thống
-SELECT user.full_name as name, rate_res.amount as likes, orders.amount as orders
+SELECT user.full_name as name
 FROM rate_res
-INNER JOIN orders
+RIGHT JOIN orders
 ON rate_res.user_id = orders.user_id
-INNER JOIN user
+RIGHT JOIN user
 ON orders.user_id = user.user_id
-WHERE rate_res.amount  = 0 AND orders.amount = 0
+WHERE rate_res.amount  IS NULL AND orders.amount IS NULL
 ;
 
 -- cau5: tính trung bình sub_food của một food
